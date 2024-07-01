@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
-from typing import Self, Any
+from typing import Self, Any, Generator
 
 from untappr.checkin import CheckIn
+from untappr.beer import Beer
 
 
 class CheckIns:
@@ -14,6 +15,15 @@ class CheckIns:
             self._entries.extend(entry)
         else:
             self._entries.append(entry)
+
+    def filter(self, beer: Beer | str | None) -> Generator[CheckIn, None, None]:
+        if isinstance(beer, Beer):
+            name = beer.name.lower()
+        else:
+            name = beer.lower()
+        for checkin in self._entries:
+            if name in checkin.beer.name.lower():
+                yield checkin
 
     @classmethod
     def from_file(cls, file_path: Path) -> Self:

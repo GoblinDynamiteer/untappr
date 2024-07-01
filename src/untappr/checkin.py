@@ -27,3 +27,9 @@ class CheckIn:
             beer=Beer.from_data(entry)
 
         )
+
+    def __str__(self) -> str:
+        return f"Checkin(date={self.date}, beer={self.beer.name})"
+
+    def __repr__(self) -> str:
+        return str(self)
