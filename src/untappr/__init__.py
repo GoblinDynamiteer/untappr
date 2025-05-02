@@ -5,7 +5,7 @@ from untappr.checkins import CheckIns
 def run_gui(check_ins: CheckIns):
     from untappr.gui import Gui
 
-    Gui().run()
+    Gui(check_ins).run()
 
 def main():
     _settings = Settings.create_from_args()
