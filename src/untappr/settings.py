@@ -7,6 +7,7 @@ from typing import Self
 @dataclasses.dataclass
 class Settings:
     file_path: pathlib.Path
+    search_filter: str = ""
 
     def __post_init__(self) -> None:
         if not self.file_path.is_file():
@@ -21,6 +22,14 @@ class Settings:
                 dest="file_path",
                 help="Path to JSON export.",
                 type=pathlib.Path)
+            parser.add_argument("--search", "-s",
+                default="",
+                dest="search",
+                help="search checkins for brewery, beer, venue, date, ...")
             return parser.parse_args()
 
-        return cls(file_path=_get_args().file_path)
+        args = _get_args()
+        return cls(
+            file_path=args.file_path,
+            search_filter=args.search
+        )

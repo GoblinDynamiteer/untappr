@@ -14,6 +14,7 @@ class CheckIn:
     rating: float
     serving_type: str
     photo_url: str
+    venue: str
 
     @classmethod
     def from_data(cls, entry: dict[str, Any]) -> Self:
@@ -24,12 +25,25 @@ class CheckIn:
             comment=entry["comment"],
             serving_type=entry["serving_type"],
             photo_url=entry["photo_url"],
+            venue=entry["venue_name"],
             beer=Beer.from_data(entry)
-
         )
 
+    @property
+    def iso_datetime_str(self) -> str:
+        return self.date.isoformat()
+
+    @property
+    def has_venue(self) -> bool:
+        return bool(self.venue)
+
     def __str__(self) -> str:
-        return f"Checkin(date={self.date}, beer={self.beer.name})"
+        return (f"Checkin("
+                f"date={self.date}, "
+                f"beer={self.beer.name}, "
+                f"brewery={self.beer.brewery.name}, "
+                f"venue={self.venue or 'N/A'})"
+                )
 
     def __repr__(self) -> str:
         return str(self)
