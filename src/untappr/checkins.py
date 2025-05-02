@@ -10,6 +10,12 @@ class CheckIns:
     def __init__(self) -> None:
         self._entries: list[CheckIn] = []
 
+
+    @property
+    def latest(self) -> CheckIn:
+        by_date = sorted(self._entries, key=lambda x: x.date)
+        return by_date[-1]
+
     def add(self, entry: list[CheckIn] | CheckIn) -> None:
         if isinstance(entry, list):
             self._entries.extend(entry)

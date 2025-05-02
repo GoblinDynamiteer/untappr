@@ -8,6 +8,8 @@ def main():
     print(check_ins)
     for utah_checkin in check_ins.filter("Utah DIPA"):
         print(utah_checkin)
+    print("latest:")
+    print(check_ins.latest)
 
 
 if __name__ == "__main__":
