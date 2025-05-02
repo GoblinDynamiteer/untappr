@@ -10,6 +10,7 @@ class CheckInsTree(QTreeWidget):
         self._check_ins = check_ins
         QTreeWidget.__init__(self)
         self.setHeaderLabels(CheckInTreeColumns.header_names())
+        self.setSortingEnabled(True)
         for check_in in self._check_ins:
             self.addTopLevelItem(CheckInTreeItem(check_in))
 
