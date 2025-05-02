@@ -13,6 +13,8 @@ class CheckInsTree(QTreeWidget):
         self.setSortingEnabled(True)
         for check_in in self._check_ins:
             self.addTopLevelItem(CheckInTreeItem(check_in))
+        self.resizeColumnToContents(CheckInTreeColumns.Date)
+        self.resizeColumnToContents(CheckInTreeColumns.Beer)
 
     def __iter__(self):
         for ix in range(self.topLevelItemCount()):
