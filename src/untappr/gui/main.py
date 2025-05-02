@@ -1,9 +1,9 @@
 
 from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QLabel, QPushButton, QWidget
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QPushButton, QWidget
 
 from untappr import CheckIns
-from untappr.gui.check_ins_tree import CheckInsTree
+from untappr.gui.check_ins_widget import CheckinsWidget
 
 
 class MainWindow(QMainWindow):
@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
         widget.setLayout(QVBoxLayout())
         btn = QPushButton("Exit")
         btn.clicked.connect(self.signal_got_exit_request)
-        widget.layout().addWidget(CheckInsTree(check_ins))
+        widget.layout().addWidget(CheckinsWidget(check_ins))
         widget.layout().addWidget(btn)
         self.setCentralWidget(widget)
 

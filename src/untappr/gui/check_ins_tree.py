@@ -12,3 +12,5 @@ class CheckInsTree(QTreeWidget):
         self.setHeaderLabels(CheckInTreeColumns.header_names())
         for check_in in self._check_ins:
             self.addTopLevelItem(CheckInTreeItem(check_in))
+
+
