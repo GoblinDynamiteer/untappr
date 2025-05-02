@@ -8,6 +8,7 @@ from typing import Self
 class Settings:
     file_path: pathlib.Path
     search_filter: str = ""
+    use_gui: bool = False
 
     def __post_init__(self) -> None:
         if not self.file_path.is_file():
@@ -22,7 +23,14 @@ class Settings:
                 dest="file_path",
                 help="Path to JSON export.",
                 type=pathlib.Path)
-            parser.add_argument("--search", "-s",
+            parser.add_argument(
+                "--gui",
+                action="store_true",
+                dest="use_gui",
+                help="start GUI mode"
+            )
+            parser.add_argument(
+                "--search", "-s",
                 default="",
                 dest="search",
                 help="search checkins for brewery, beer, venue, date, ...")
@@ -31,5 +39,6 @@ class Settings:
         args = _get_args()
         return cls(
             file_path=args.file_path,
-            search_filter=args.search
+            search_filter=args.search,
+            use_gui=args.use_gui
         )
